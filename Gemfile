@@ -34,7 +34,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem 'devise', '~> 4.9' 
-gem 'stripe', '~> 10.0' 
+gem 'stripe', '~> 18.1' 
 gem 'pagy', '~> 8.0' 
 
 
