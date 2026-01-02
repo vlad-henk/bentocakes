@@ -1,0 +1,73 @@
+<%# app/views/pages/home.html.erb %>
+<div class="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100">
+  <!-- Навігація -->
+  <nav class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+      <div class="flex items-center space-x-2">
+        <div class="w-10 h-10 bg-rose-500 rounded-full"></div>
+        <h1 class="text-3xl font-bold text-rose-700">Bento<span class="text-amber-600">Cakes</span></h1>
+      </div>
+      
+      <div class="hidden md:flex space-x-8">
+        <%= link_to 'Головна', root_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+        <%= link_to 'Торти', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+        <%= link_to 'Солодощі', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+        <%= link_to 'Про нас', about_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+        <%= link_to 'Контакти', contact_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <%= link_to 'Кошик', '#', class: 'bg-rose-600 text-white px-4 py-2 rounded-full hover:bg-rose-700 transition' %>
+        <%= link_to 'Увійти', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Герой-секція -->
+  <section class="container mx-auto px-4 py-16 md:py-24">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <h2 class="text-5xl md:text-6xl font-bold text-rose-900 mb-6">
+          Солодкі моменти з <span class="text-amber-600">BentoCakes</span>
+        </h2>
+        <p class="text-lg text-rose-800 mb-8">
+          Ексклюзивні торти та солодощі ручної роботи. 
+          Створено з любов'ю для ваших особливих моментів.
+        </p>
+        <div class="flex space-x-4">
+          <%= link_to 'Замовити зараз', '#', 
+              class: 'bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-rose-700 transition shadow-lg' %>
+          <%= link_to 'Переглянути меню', '#', 
+              class: 'border-2 border-rose-600 text-rose-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-rose-50 transition' %>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <div class="bg-rose-200 rounded-3xl h-96 w-full"></div>
+        <!-- Тут буде зображення торта -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Популярні товари -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-rose-900 mb-12">Найпопулярніші</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <% 3.times do %>
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition">
+          <div class="h-48 bg-amber-100"></div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-rose-800 mb-2">Бенто-торт "Полуниця"</h3>
+            <p class="text-rose-600 mb-4">Ніжний бісквіт з вершково-сирним кремом</p>
+            <div class="flex justify-between items-center">
+              <span class="text-2xl font-bold text-amber-600">450 ₴</span>
+              <button class="bg-rose-100 text-rose-700 px-4 py-2 rounded-full hover:bg-rose-200 transition">
+                Додати в кошик
+              </button>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+</div>
