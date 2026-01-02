@@ -1,0 +1,123 @@
+<%# app/views/pages/about.html.erb %>
+<div class="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+  <!-- Навігація (спільна) -->
+  <%= render 'shared/navbar' %>
+  
+  <!-- Хлібні крихти -->
+  <div class="container mx-auto px-4 py-8">
+    <nav class="flex space-x-2 text-sm text-rose-600">
+      <%= link_to 'Головна', root_path, class: 'hover:text-rose-800' %>
+      <span>/</span>
+      <span class="text-rose-900 font-medium">Про нас</span>
+    </nav>
+  </div>
+  
+  <!-- Заголовок -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl md:text-6xl font-bold text-rose-900 mb-6">Наша історія</h1>
+      <p class="text-xl text-rose-700">Як з любові до солодощів народився BentoCakes</p>
+    </div>
+  </section>
+  
+  <!-- Основна інформація -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-12 items-center">
+      <div>
+        <div class="bg-gradient-to-br from-amber-100 to-rose-100 rounded-3xl p-8 shadow-xl">
+          <h2 class="text-3xl font-bold text-rose-900 mb-6">Наша місія</h2>
+          <p class="text-lg text-rose-800 mb-4">
+            Ми віримо, що кожен момент заслуговує на особливу солодкість. 
+            Наша мета - створювати не просто десерти, а справжні емоції.
+          </p>
+          <p class="text-lg text-rose-800">
+            Кожен торт, кожен макарон - це частинка нашої душі, 
+            яку ми з любов'ю даруємо вам.
+          </p>
+        </div>
+      </div>
+      
+      <div class="relative">
+        <div class="bg-gradient-to-br from-rose-400 to-pink-500 rounded-3xl h-96 w-full shadow-2xl overflow-hidden">
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-center p-8">
+              <div class="text-6xl mb-4">👩‍🍳</div>
+              <p class="text-2xl font-bold">Професійні кондитери</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Цінності -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-rose-900 mb-12">Наші цінності</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <% [
+        { 
+          title: 'Якість', 
+          description: 'Використовуємо тільки свіжі та якісні інгредієнти',
+          icon: '⭐',
+          color: 'bg-amber-100 border-amber-200'
+        },
+        { 
+          title: 'Креативність', 
+          description: 'Кожен десерт - унікальний твір мистецтва',
+          icon: '🎨',
+          color: 'bg-pink-100 border-pink-200'
+        },
+        { 
+          title: 'Любов', 
+          description: 'Готуємо з любов'ю та турботою про кожного клієнта',
+          icon: '❤️',
+          color: 'bg-rose-100 border-rose-200'
+        }
+      ].each do |value| %>
+        <div class="<%= value[:color] %> border-2 rounded-3xl p-8 text-center shadow-lg">
+          <div class="text-5xl mb-4"><%= value[:icon] %></div>
+          <h3 class="text-2xl font-bold text-rose-900 mb-3"><%= value[:title] %></h3>
+          <p class="text-rose-700"><%= value[:description] %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  
+  <!-- Команда -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-rose-900 mb-12">Наша команда</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <% [
+        { name: 'Анна', role: 'Головний кондитер', bio: '12+ років досвіду', emoji: '👩‍🍳' },
+        { name: 'Марія', role: 'Дизайнер десертів', bio: 'Магістр кулінарного мистецтва', emoji: '✨' },
+        { name: 'Олександр', role: 'Менеджер', bio: 'Забезпечує найкращий сервіс', emoji: '👨‍💼' }
+      ].each do |member| %>
+        <div class="bg-white rounded-3xl p-8 shadow-xl text-center hover:shadow-2xl transition">
+          <div class="text-6xl mb-4"><%= member[:emoji] %></div>
+          <h3 class="text-2xl font-bold text-rose-900 mb-2"><%= member[:name] %></h3>
+          <p class="text-amber-600 font-semibold mb-3"><%= member[:role] %></p>
+          <p class="text-rose-700"><%= member[:bio] %></p>
+        </div>
+      <% end %>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="container mx-auto px-4 py-16 text-center">
+    <div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-3xl p-12 text-white shadow-2xl">
+      <h2 class="text-4xl font-bold mb-6">Спробуйте нашу солодкість!</h2>
+      <p class="text-xl mb-8 opacity-90">Приєднуйтесь до тисячі щасливих клієнтів</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <%= link_to 'Переглянути меню', products_path, 
+            class: 'bg-white text-rose-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-50 transition shadow-lg' %>
+        <%= link_to 'Замовити консультацію', contact_path, 
+            class: 'border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition' %>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Футер (спільний) -->
+  <%= render 'shared/footer' %>
+</div>

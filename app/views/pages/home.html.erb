@@ -1,73 +1,198 @@
-<%# app/views/pages/home.html.erb %>
 <div class="min-h-screen bg-gradient-to-br from-pink-50 to-rose-100">
-  <!-- Навігація -->
-  <nav class="bg-white/80 backdrop-blur-sm shadow-lg sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <div class="flex items-center space-x-2">
-        <div class="w-10 h-10 bg-rose-500 rounded-full"></div>
-        <h1 class="text-3xl font-bold text-rose-700">Bento<span class="text-amber-600">Cakes</span></h1>
-      </div>
-      
-      <div class="hidden md:flex space-x-8">
-        <%= link_to 'Головна', root_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-        <%= link_to 'Торти', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-        <%= link_to 'Солодощі', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-        <%= link_to 'Про нас', about_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-        <%= link_to 'Контакти', contact_path, class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-      </div>
-      
-      <div class="flex items-center space-x-4">
-        <%= link_to 'Кошик', '#', class: 'bg-rose-600 text-white px-4 py-2 rounded-full hover:bg-rose-700 transition' %>
-        <%= link_to 'Увійти', '#', class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-      </div>
-    </div>
-  </nav>
+  <%= render 'shared/navbar' %>
 
-  <!-- Герой-секція -->
-  <section class="container mx-auto px-4 py-16 md:py-24">
+  <section class="container mx-auto px-4 py-12 md:py-24">
     <div class="grid md:grid-cols-2 gap-12 items-center">
       <div>
-        <h2 class="text-5xl md:text-6xl font-bold text-rose-900 mb-6">
-          Солодкі моменти з <span class="text-amber-600">BentoCakes</span>
+        <h2 class="text-5xl md:text-6xl font-bold text-rose-900 mb-6 leading-tight">
+          Солодкі моменти<br>з <span class="text-amber-600">BentoCakes</span>
         </h2>
-        <p class="text-lg text-rose-800 mb-8">
+        <p class="text-xl text-rose-800 mb-8 leading-relaxed">
           Ексклюзивні торти та солодощі ручної роботи. 
           Створено з любов'ю для ваших особливих моментів.
         </p>
-        <div class="flex space-x-4">
-          <%= link_to 'Замовити зараз', '#', 
-              class: 'bg-rose-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-rose-700 transition shadow-lg' %>
-          <%= link_to 'Переглянути меню', '#', 
-              class: 'border-2 border-rose-600 text-rose-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-rose-50 transition' %>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <%= link_to 'Переглянути меню', products_path, 
+              class: 'bg-rose-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-700 transition shadow-lg hover:shadow-xl transform hover:-translate-y-1' %>
+          <%= link_to 'Замовити зараз', cart_path, 
+              class: 'border-2 border-rose-600 text-rose-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-50 transition' %>
+        </div>
+        
+        <!-- Статистика -->
+        <div class="mt-12 grid grid-cols-3 gap-6">
+          <div class="text-center">
+            <div class="text-3xl font-bold text-amber-600">500+</div>
+            <div class="text-rose-700">Щасливих клієнтів</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-amber-600">2k+</div>
+            <div class="text-rose-700">Виконаних замовлень</div>
+          </div>
+          <div class="text-center">
+            <div class="text-3xl font-bold text-amber-600">50+</div>
+            <div class="text-rose-700">Видів солодощів</div>
+          </div>
         </div>
       </div>
       
       <div class="relative">
-        <div class="bg-rose-200 rounded-3xl h-96 w-full"></div>
-        <!-- Тут буде зображення торта -->
+        <div class="bg-gradient-to-br from-rose-400 to-amber-300 rounded-3xl h-[500px] w-full shadow-2xl overflow-hidden">
+          <!-- Тут буде зображення торта -->
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-white text-center p-8">
+              <div class="text-6xl mb-4">🍰</div>
+              <p class="text-2xl font-bold">Свіжі та смачні</p>
+              <p class="text-lg mt-2">Кожен день!</p>
+            </div>
+          </div>
+        </div>
+        <!-- Декоративні елементи -->
+        <div class="absolute -top-6 -left-6 w-24 h-24 bg-amber-200 rounded-full opacity-50"></div>
+        <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-pink-200 rounded-full opacity-50"></div>
       </div>
+    </div>
+  </section>
+
+  <!-- Категорії -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-rose-900 mb-4">Наші категорії</h2>
+    <p class="text-center text-rose-700 mb-12 text-lg">Виберіть ваше улюблене</p>
+    
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <% [
+        { name: 'Бенто-торти', emoji: '🎂', color: 'from-rose-400 to-pink-500', path: "#{products_path}?category=bento_cakes" },
+        { name: 'Капкейки', emoji: '🧁', color: 'from-amber-400 to-orange-500', path: "#{products_path}?category=cupcakes" },
+        { name: 'Макарони', emoji: '🍪', color: 'from-purple-400 to-pink-500', path: "#{products_path}?category=macarons" },
+        { name: 'Десерти', emoji: '🍮', color: 'from-blue-400 to-cyan-500', path: "#{products_path}?category=desserts" }
+      ].each do |category| %>
+        <%= link_to category[:path], class: 'block' do %>
+          <div class="bg-gradient-to-br <%= category[:color] %> rounded-2xl p-8 text-white text-center shadow-lg hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
+            <div class="text-5xl mb-4"><%= category[:emoji] %></div>
+            <h3 class="text-xl font-bold"><%= category[:name] %></h3>
+          </div>
+        <% end %>
+      <% end %>
     </div>
   </section>
 
   <!-- Популярні товари -->
   <section class="container mx-auto px-4 py-16">
-    <h2 class="text-4xl font-bold text-center text-rose-900 mb-12">Найпопулярніші</h2>
+    <div class="flex justify-between items-center mb-12">
+      <div>
+        <h2 class="text-4xl font-bold text-rose-900">Популярні позиції</h2>
+        <p class="text-rose-700 mt-2">Найулюбленіші серед наших клієнтів</p>
+      </div>
+      <%= link_to 'Всі товари →', products_path, 
+          class: 'text-rose-600 hover:text-rose-800 font-semibold text-lg' %>
+    </div>
+    
     <div class="grid md:grid-cols-3 gap-8">
-      <% 3.times do %>
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition">
-          <div class="h-48 bg-amber-100"></div>
-          <div class="p-6">
-            <h3 class="text-xl font-bold text-rose-800 mb-2">Бенто-торт "Полуниця"</h3>
-            <p class="text-rose-600 mb-4">Ніжний бісквіт з вершково-сирним кремом</p>
-            <div class="flex justify-between items-center">
-              <span class="text-2xl font-bold text-amber-600">450 ₴</span>
-              <button class="bg-rose-100 text-rose-700 px-4 py-2 rounded-full hover:bg-rose-200 transition">
-                Додати в кошик
-              </button>
+      <% @popular_products ||= [] %>
+      <% if @popular_products.any? %>
+        <% @popular_products.each do |product| %>
+          <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+            <div class="h-64 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+              <span class="text-6xl">
+                <%= case product.category
+                    when 'bento_cakes' then '🎂'
+                    when 'cupcakes' then '🧁'
+                    when 'macarons' then '🍪'
+                    else '🍰'
+                    end %>
+              </span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-rose-800 mb-2"><%= product.name %></h3>
+              <p class="text-rose-600 mb-4 text-sm"><%= product.description.truncate(60) %></p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-2xl font-bold text-amber-600"><%= product.price %> ₴</span>
+                </div>
+                <%= button_to 'Додати в кошик', add_item_cart_path(product_id: product.id), 
+                      method: :post,
+                      params: { quantity: 1 },
+                      class: 'bg-rose-100 text-rose-700 px-4 py-2 rounded-full hover:bg-rose-200 transition flex items-center space-x-2' %>
+              </div>
             </div>
           </div>
+        <% end %>
+      <% else %>
+        <!-- Заглушки для прикладу -->
+        <% 3.times do |i| %>
+          <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
+            <div class="h-64 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
+              <span class="text-6xl">
+                <%= ['🎂', '🧁', '🍰'][i] %>
+              </span>
+            </div>
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-rose-800 mb-2">Бенто-торт "<%= ['Полуниця', 'Шоколад', 'Ваніль'][i] %>"</h3>
+              <p class="text-rose-600 mb-4 text-sm"><%= ['Зі свіжими ягодами', 'З ніжним кремом', 'З ароматом ванілі'][i] %></p>
+              <div class="flex justify-between items-center">
+                <div>
+                  <span class="text-2xl font-bold text-amber-600">450 ₴</span>
+                </div>
+                <button class="bg-rose-100 text-rose-700 px-4 py-2 rounded-full hover:bg-rose-200 transition flex items-center space-x-2">
+                  <span>Додати</span>
+                  <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+
+  <!-- Відгуки -->
+  <section class="container mx-auto px-4 py-16">
+    <h2 class="text-4xl font-bold text-center text-rose-900 mb-12">Відгуки клієнтів</h2>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <% [
+        { name: 'Ольга', text: 'Найсмачніші бенто-торти в місті! Замовляю вже третій раз.', rating: 5 },
+        { name: 'Максим', text: 'Замовляв торт на день народження. Всі були в захваті!', rating: 5 },
+        { name: 'Софія', text: 'Швидка доставка, якісні продукти. Рекомендую!', rating: 4 }
+      ].each do |review| %>
+        <div class="bg-white rounded-3xl p-8 shadow-lg">
+          <div class="flex items-center mb-4">
+            <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mr-4">
+              <span class="text-rose-600 font-bold"><%= review[:name][0] %></span>
+            </div>
+            <div>
+              <h4 class="font-bold text-rose-900"><%= review[:name] %></h4>
+              <div class="flex text-amber-400">
+                <% review[:rating].times do %>
+                  ★
+                <% end %>
+                <% (5 - review[:rating]).times do %>
+                  ☆
+                <% end %>
+              </div>
+            </div>
+          </div>
+          <p class="text-rose-700 italic">"<%= review[:text] %>"</p>
         </div>
       <% end %>
     </div>
   </section>
+
+  <!-- CTA секція -->
+  <section class="container mx-auto px-4 py-16">
+    <div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-3xl p-12 text-white text-center shadow-2xl">
+      <h2 class="text-4xl font-bold mb-6">Готові до солодких вражень?</h2>
+      <p class="text-xl mb-8 opacity-90">Замовляйте прямо зараз та отримайте знижку 10% на перше замовлення</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <%= link_to 'Оформити замовлення', cart_path, 
+              class: 'bg-white text-rose-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-50 transition shadow-lg' %>
+        <%= link_to 'Зателефонувати нам', 'tel:+380671234567', 
+              class: 'border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition' %>
+      </div>
+    </div>
+  </section>
+
+  <!-- Використовуємо спільний футер -->
+  <%= render 'shared/footer' %>
 </div>

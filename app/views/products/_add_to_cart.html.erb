@@ -1,0 +1,61 @@
+<%# app/views/products/_add_to_cart.html.erb %>
+<div class="flex items-center space-x-4">
+  <!-- Кількість -->
+  <div class="flex items-center border border-rose-200 rounded-full">
+    <button type="button" class="px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-l-full" onclick="decreaseQuantity()">-</button>
+    <input type="number" id="quantity" name="quantity" value="1" min="1" max="10" 
+           class="w-16 text-center border-0 focus:ring-0 bg-transparent">
+    <button type="button" class="px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-r-full" onclick="increaseQuantity()">+</button>
+  </div>
+  
+  <!-- Кнопка додавання -->
+  <%= button_to add_item_cart_path(product_id: product.id), 
+        method: :post,
+        params: { quantity: 1 },
+        class: 'bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-2 px-6 rounded-full hover:shadow-lg transition flex items-center space-x-2',
+        form: { class: 'inline', id: 'add-to-cart-form' } do %>
+    <span>Додати в кошик</span>
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+    </svg>
+  <% end %>
+</div>
+
+<script>
+function increaseQuantity() {
+  const input = document.getElementById('quantity');
+  const max = parseInt(input.getAttribute('max'));
+  if (input.value < max) {
+    input.value = parseInt(input.value) + 1;
+    updateCartFormQuantity();
+  }
+}
+
+function decreaseQuantity() {
+  const input = document.getElementById('quantity');
+  const min = parseInt(input.getAttribute('min'));
+  if (input.value > min) {
+    input.value = parseInt(input.value) - 1;
+    updateCartFormQuantity();
+  }
+}
+
+function updateCartFormQuantity() {
+  const form = document.getElementById('add-to-cart-form');
+  const quantityInput = document.createElement('input');
+  quantityInput.type = 'hidden';
+  quantityInput.name = 'quantity';
+  quantityInput.value = document.getElementById('quantity').value;
+  
+  // Видаляємо старий input quantity
+  const oldInput = form.querySelector('input[name="quantity"]');
+  if (oldInput) oldInput.remove();
+  
+  form.appendChild(quantityInput);
+}
+
+// Ініціалізація при завантаженні
+document.addEventListener('DOMContentLoaded', function() {
+  updateCartFormQuantity();
+});
+</script>

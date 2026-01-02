@@ -1,0 +1,79 @@
+<%# app/views/pages/contact.html.erb %>
+<div class="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+  <!-- Навігація -->
+  <%= render 'shared/navbar' %>
+  
+  <!-- Хлібні крихти -->
+  <div class="container mx-auto px-4 py-8">
+    <nav class="flex space-x-2 text-sm text-rose-600">
+      <%= link_to 'Головна', root_path, class: 'hover:text-rose-800' %>
+      <span>/</span>
+      <span class="text-rose-900 font-medium">Контакти</span>
+    </nav>
+  </div>
+  
+  <!-- Заголовок -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl md:text-6xl font-bold text-rose-900 mb-6">Зв'яжіться з нами</h1>
+      <p class="text-xl text-rose-700">Ми завжди раді вам допомогти та відповісти на питання</p>
+    </div>
+  </section>
+  
+  <!-- Контактна інформація та форма -->
+  <section class="container mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-2 gap-12">
+      <!-- Контактна інформація -->
+      <div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+          <h2 class="text-3xl font-bold text-rose-900 mb-8">Наші контакти</h2>
+          
+          <div class="space-y-6">
+            <div class="flex items-start space-x-4">
+              <div class="bg-rose-100 p-3 rounded-full">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-rose-900">Адреса</h3>
+                <p class="text-rose-700">м. Київ, вул. Солодка, 15</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="bg-rose-100 p-3 rounded-full">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-rose-900">Телефони</h3>
+                <p class="text-rose-700">+38 (067) 123 45 67</p>
+                <p class="text-rose-700">+38 (063) 987 65 43</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="bg-rose-100 p-3 rounded-full">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-rose-900">Email</h3>
+                <p class="text-rose-700">hello@bentocakes.com</p>
+                <p class="text-rose-700">orders@bentocakes.com</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-4">
+              <div class="bg-rose-100 p-3 rounded-full">
+                <svg class="w-6 h-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+              </div>
+              <div>
+                <h3 class="font-bold text-rose-900">Графік роботи</h3>
+                <p class="text-rose-700">П

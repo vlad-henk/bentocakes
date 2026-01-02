@@ -1,0 +1,139 @@
+<%# app/views/carts/show.html.erb %>
+<div class="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+  <%= render 'shared/navbar' %>
+  
+  <div class="container mx-auto px-4 py-8">
+    <!-- Хлібні крихти -->
+    <nav class="flex space-x-2 text-sm text-rose-600 mb-8">
+      <%= link_to 'Головна', root_path, class: 'hover:text-rose-800' %>
+      <span>/</span>
+      <span class="text-rose-900 font-medium">Корзина</span>
+    </nav>
+    
+    <h1 class="text-4xl font-bold text-rose-900 mb-8">Кошик</h1>
+    
+    <% if @cart.cart_items.any? %>
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Список товарів -->
+        <div class="lg:col-span-2">
+          <div class="bg-white rounded-3xl shadow-lg p-6">
+            <div class="space-y-6">
+              <% @cart.cart_items.each do |item| %>
+                <div class="flex items-center space-x-4 p-4 border-b border-rose-100 last:border-0">
+                  <!-- Зображення товару -->
+                  <div class="w-24 h-24 bg-gradient-to-br from-rose-100 to-amber-100 rounded-xl flex items-center justify-center">
+                    <span class="text-3xl">🎂</span>
+                  </div>
+                  
+                  <!-- Інформація про товар -->
+                  <div class="flex-1">
+                    <h3 class="font-bold text-lg text-rose-900"><%= item.product.name %></h3>
+                    <p class="text-rose-600 text-sm"><%= item.product.description %></p>
+                    <div class="flex items-center justify-between mt-2">
+                      <div class="flex items-center space-x-4">
+                        <!-- Кількість -->
+                        <div class="flex items-center border border-rose-200 rounded-full">
+                          <%= button_to '-', remove_item_cart_path(item_id: item.id), 
+                                method: :delete,
+                                class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-l-full' %>
+                          <span class="px-3 py-1"><%= item.quantity %></span>
+                          <%= button_to '+', add_item_cart_path(product_id: item.product.id), 
+                                method: :post,
+                                class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-r-full' %>
+                        </div>
+                        
+                        <!-- Ціна за одиницю -->
+                        <span class="text-rose-700"><%= item.product.price %> ₴</span>
+                      </div>
+                      
+                      <!-- Сума та видалення -->
+                      <div class="flex items-center space-x-4">
+                        <span class="text-xl font-bold text-amber-600"><%= item.total_price %> ₴</span>
+                        <%= button_to '×', remove_item_cart_path(item_id: item.id), 
+                              method: :delete,
+                              data: { confirm: 'Видалити цей товар?' },
+                              class: 'text-rose-400 hover:text-rose-600 text-2xl' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+            
+            <!-- Кнопки дій -->
+            <div class="flex justify-between items-center mt-8 pt-6 border-t border-rose-100">
+              <%= link_to '← Продовжити покупки', products_path, 
+                    class: 'text-rose-600 hover:text-rose-800 font-medium' %>
+              <%= button_to 'Очистити корзину', cart_path, 
+                    method: :delete,
+                    data: { confirm: 'Очистити всю корзину?' },
+                    class: 'text-rose-400 hover:text-rose-600 font-medium' %>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Загальна інформація -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-3xl shadow-lg p-6 sticky top-24">
+            <h2 class="text-2xl font-bold text-rose-900 mb-6">Деталі замовлення</h2>
+            
+            <!-- Підсумок -->
+            <div class="space-y-4 mb-6">
+              <div class="flex justify-between">
+                <span class="text-rose-700">Товари:</span>
+                <span class="font-medium"><%= @cart.total_items %> шт.</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-rose-700">Сума:</span>
+                <span class="font-medium"><%= @cart.total_price %> ₴</span>
+              </div>
+              <div class="flex justify-between">
+                <span class="text-rose-700">Доставка:</span>
+                <span class="font-medium">100 ₴</span>
+              </div>
+              <div class="border-t border-rose-200 pt-4">
+                <div class="flex justify-between text-lg font-bold">
+                  <span class="text-rose-900">Всього:</span>
+                  <span class="text-amber-600"><%= @cart.total_price + 100 %> ₴</span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Примітка -->
+            <div class="mb-6">
+              <label class="block text-rose-700 mb-2">Примітка до замовлення</label>
+              <textarea class="w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100" 
+                        rows="3" placeholder="Ваші побажання..."></textarea>
+            </div>
+            
+            <!-- Кнопка оформлення -->
+            <%= link_to 'Оформити замовлення', new_order_path, 
+                  class: 'block w-full bg-gradient-to-r from-rose-500 to-pink-600 text-white text-center font-bold py-4 rounded-xl hover:shadow-xl transition shadow-lg' %>
+            
+            <!-- Безпека -->
+            <div class="mt-6 text-center">
+              <div class="flex justify-center space-x-4 text-rose-400 mb-2">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                </svg>
+                <span>Безпечна оплата</span>
+              </div>
+              <p class="text-xs text-rose-500">Ваші дані захищені</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% else %>
+      <!-- Пуста корзина -->
+      <div class="text-center py-16">
+        <div class="text-8xl mb-6">🛒</div>
+        <h2 class="text-3xl font-bold text-rose-900 mb-4">Кошик порожній</h2>
+        <p class="text-rose-700 mb-8 max-w-md mx-auto">Додайте товари до корзини, щоб зробити замовлення</p>
+        <%= link_to 'Переглянути меню', products_path, 
+              class: 'inline-block bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-3 px-8 rounded-full hover:shadow-xl transition' %>
+      </div>
+    <% end %>
+  </div>
+  
+  <%= render 'shared/footer' %>
+</div>
