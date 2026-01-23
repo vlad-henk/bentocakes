@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "orders/index"
+  get "orders/show"
+  get "orders/new"
+  get "orders/create"
   get "carts/show"
   get "carts/update"
   get "carts/destroy"
@@ -9,6 +13,7 @@ Rails.application.routes.draw do
   get '/delivery', to: 'pages#delivery'
 
   resources :products, only: [:index, :show]
+
   resource :cart, only: [:show, :update, :destroy] do
     member do
       post :add_item
@@ -16,6 +21,7 @@ Rails.application.routes.draw do
       post :clear
     end
   end
+  
   resources :orders, only: [:new, :create, :show, :index]
 
   devise_for :users, controllers: {

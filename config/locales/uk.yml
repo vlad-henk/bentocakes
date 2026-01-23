@@ -1,0 +1,8 @@
+uk:
+  orders:
+    status:
+      pending: "Очікує обробки"
+      processing: "В обробці"
+      shipped: "Відправлено"
+      delivered: "Доставлено"
+      cancelled: "Скасовано"

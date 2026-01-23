@@ -1,29 +1,67 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+<%# app/views/devise/registrations/new.html.erb %>
+<div class="min-h-screen w-full bg-gradient-to-b from-pink-50 to-white flex items-center justify-center py-12">
+  <div class="container mx-auto px-4">
+    <div class="max-w-md mx-auto">
+      <div class="text-center mb-8">
+        <%= link_to root_path, class: 'inline-flex items-center space-x-3' do %>
+          <div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+            <span class="text-white text-2xl font-bold">B</span>
+          </div>
+          <h1 class="text-3xl font-bold text-rose-800">Bento<span class="text-amber-600">Cakes</span></h1>
+        <% end %>
+        <h2 class="text-2xl font-bold text-rose-900 mt-6">Створіть обліковий запис</h2>
+      </div>
+      
+      <div class="bg-white rounded-3xl shadow-xl p-8">
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { class: 'space-y-6' }) do |f| %>
+          <%= render "devise/shared/error_messages", resource: resource %>
+          
+          <div>
+            <%= f.label :name, "Ім'я *", class: 'block text-rose-700 mb-2 font-medium' %>
+            <%= f.text_field :name, autofocus: true, 
+                  class: 'w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100 transition',
+                  placeholder: "Введіть ваше ім'я" %>
+          </div>
+          
+          <div>
+            <%= f.label :email, "Email *", class: 'block text-rose-700 mb-2 font-medium' %>
+            <%= f.email_field :email, autocomplete: "email",
+                  class: 'w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100 transition',
+                  placeholder: "example@email.com" %>
+          </div>
+          
+          <div>
+            <%= f.label :phone, "Телефон", class: 'block text-rose-700 mb-2 font-medium' %>
+            <%= f.telephone_field :phone,
+                  class: 'w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100 transition',
+                  placeholder: "+38 (0XX) XXX XX XX" %>
+          </div>
+          
+          <div>
+            <%= f.label :password, "Пароль *", class: 'block text-rose-700 mb-2 font-medium' %>
+            <% if @minimum_password_length %>
+              <p class="text-sm text-rose-500 mb-2">(Мінімум <%= @minimum_password_length %> символів)</p>
+            <% end %>
+            <%= f.password_field :password, autocomplete: "new-password",
+                  class: 'w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100 transition' %>
+          </div>
+          
+          <div>
+            <%= f.label :password_confirmation, "Підтвердження пароля *", class: 'block text-rose-700 mb-2 font-medium' %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                  class: 'w-full border border-rose-200 rounded-xl p-3 focus:border-rose-300 focus:ring focus:ring-rose-100 transition' %>
+          </div>
+          
+          <div class="pt-4">
+            <%= f.submit "Зареєструватися", 
+                  class: 'w-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-4 rounded-xl hover:shadow-xl transition shadow-lg cursor-pointer' %>
+          </div>
+        <% end %>
+        
+        <div class="mt-6 pt-6 border-t border-rose-100">
+          <%= render "devise/shared/links" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "devise/shared/links" %>
+</div>

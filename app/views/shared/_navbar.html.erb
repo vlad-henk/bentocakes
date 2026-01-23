@@ -32,8 +32,9 @@
                 class: 'text-rose-700 hover:text-rose-900 font-medium hidden md:block' %>
           <%= link_to current_user.name, edit_user_registration_path, 
                 class: 'text-rose-700 hover:text-rose-900 font-medium' %>
-          <%= link_to 'Вийти', destroy_user_session_path, data: { turbo_method: :delete },
-                class: 'text-rose-700 hover:text-rose-900 font-medium' %>
+          <%= button_to 'Вийти', destroy_user_session_path, 
+                method: :delete,
+                class: 'text-rose-700 hover:text-rose-900 font-medium bg-transparent border-none cursor-pointer' %>
         <% else %>
           <%= link_to 'Увійти', new_user_session_path, 
                 class: 'text-rose-700 hover:text-rose-900 font-medium' %>

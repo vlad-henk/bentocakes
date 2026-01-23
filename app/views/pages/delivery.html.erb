@@ -1,4 +1,4 @@
-<div class="min-h-screen bg-gradient-to-b from-pink-50 to-white">
+<div class="min-h-screen w-full bg-gradient-to-b from-pink-50 to-white">
   <%= render 'shared/navbar' %>
   
   <!-- Хлібні крихти -->
@@ -21,72 +21,214 @@
   <!-- Доставка -->
   <section class="container mx-auto px-4 py-12">
     <div class="grid md:grid-cols-2 gap-12">
+      <!-- Інформація про доставку -->
       <div>
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-rose-900 mb-6">🚚 Доставка</h2>
-          
-          <div class="space-y-6">
-            <div>
-              <h3 class="text-xl font-bold text-rose-800 mb-2">Зона доставки</h3>
-              <ul class="list-disc pl-5 text-rose-700 space-y-1">
-                <li>Київ - безкоштовно при замовленні від 1000 ₴</li>
-                <li>Київська область - 150 ₴</li>
-                <li>Доставка по Україні - за тарифами перевізника</li>
-              </ul>
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mr-4">
+              <span class="text-2xl">🚚</span>
             </div>
-            
-            <div>
-              <h3 class="text-xl font-bold text-rose-800 mb-2">Час доставки</h3>
-              <ul class="list-disc pl-5 text-rose-700 space-y-1">
-                <li>Замовлення на сьогодні - приймаємо до 14:00</li>
-                <li>Доставка в межах Києва - 2-3 години</li>
-                <li>Попереднє замовлення - за 1-3 дні</li>
-              </ul>
-            </div>
-            
-            <div>
-              <h3 class="text-xl font-bold text-rose-800 mb-2">Самовивіз</h3>
-              <p class="text-rose-700">м. Київ, вул. Солодка, 15</p>
-              <p class="text-rose-600 text-sm mt-1">Графік: Пн-Нд 9:00-20:00</p>
-            </div>
+            <h2 class="text-3xl font-bold text-rose-900">Доставка</h2>
           </div>
-        </div>
-      </div>
-      
-      <div>
-        <div class="bg-white rounded-3xl shadow-xl p-8">
-          <h2 class="text-3xl font-bold text-rose-900 mb-6">💳 Оплата</h2>
           
           <div class="space-y-6">
             <div>
-              <h3 class="text-xl font-bold text-rose-800 mb-2">Способи оплати</h3>
-              <div class="grid grid-cols-2 gap-4 mt-4">
-                <div class="bg-rose-50 rounded-xl p-4 text-center">
-                  <div class="text-3xl mb-2">💳</div>
-                  <p class="font-medium text-rose-800">Карткою онлайн</p>
+              <h3 class="text-xl font-bold text-rose-800 mb-3">Зона доставки</h3>
+              <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-rose-50 rounded-lg">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3">
+                      <span class="text-rose-700">📦</span>
+                    </div>
+                    <span class="font-medium text-rose-800">Київ</span>
+                  </div>
+                  <span class="font-bold text-amber-600">Безкоштовно від 1000 ₴</span>
                 </div>
-                <div class="bg-rose-50 rounded-xl p-4 text-center">
-                  <div class="text-3xl mb-2">📱</div>
-                  <p class="font-medium text-rose-800">Google/Apple Pay</p>
+                
+                <div class="flex items-center justify-between p-3 bg-rose-50 rounded-lg">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3">
+                      <span class="text-rose-700">🏙️</span>
+                    </div>
+                    <span class="font-medium text-rose-800">Київська область</span>
+                  </div>
+                  <span class="font-bold text-amber-600">150 ₴</span>
                 </div>
-                <div class="bg-rose-50 rounded-xl p-4 text-center">
-                  <div class="text-3xl mb-2">💵</div>
-                  <p class="font-medium text-rose-800">Готівкою</p>
-                </div>
-                <div class="bg-rose-50 rounded-xl p-4 text-center">
-                  <div class="text-3xl mb-2">🏦</div>
-                  <p class="font-medium text-rose-800">На картку</p>
+                
+                <div class="flex items-center justify-between p-3 bg-rose-50 rounded-lg">
+                  <div class="flex items-center">
+                    <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3">
+                      <span class="text-rose-700">🇺🇦</span>
+                    </div>
+                    <span class="font-medium text-rose-800">Вся Україна</span>
+                  </div>
+                  <span class="font-bold text-amber-600">За тарифами перевізника</span>
                 </div>
               </div>
             </div>
             
             <div>
-              <h3 class="text-xl font-bold text-rose-800 mb-2">Гарантії</h3>
-              <ul class="list-disc pl-5 text-rose-700 space-y-1">
-                <li>Повна безпека платежів</li>
-                <li>Чек на email після оплати</li>
-                <li>Повернення коштів у разі проблем</li>
+              <h3 class="text-xl font-bold text-rose-800 mb-3">Час доставки</h3>
+              <ul class="space-y-2 text-rose-700">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Замовлення на сьогодні приймаємо до <strong>14:00</strong></span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Доставка в межах Києва - <strong>2-3 години</strong></span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Попереднє замовлення - <strong>за 1-3 дні</strong></span>
+                </li>
               </ul>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-rose-800 mb-3">Самовивіз</h3>
+              <div class="bg-amber-50 rounded-xl p-4">
+                <div class="flex items-center mb-2">
+                  <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-amber-600">🏪</span>
+                  </div>
+                  <span class="font-bold text-amber-800">м. Київ, вул. Солодка, 15</span>
+                </div>
+                <p class="text-amber-700">Графік самовивозу: <strong>Пн-Нд 9:00-20:00</strong></p>
+                <p class="text-amber-600 text-sm mt-1">Перед приїздом рекомендуємо зателефонувати</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Умови доставки -->
+        <div class="bg-white rounded-3xl shadow-xl p-8">
+          <h3 class="text-2xl font-bold text-rose-900 mb-6">📦 Умови доставки</h3>
+          <div class="space-y-4 text-rose-700">
+            <p>Доставка здійснюється щодня з <strong>10:00 до 20:00</strong>. Ми завчасно повідомляємо про час прибуття кур'єра.</p>
+            <p>При отриманні замовлення перевіряйте комплектацію та цілісність упаковки. У разі пошкоджень, будь ласка, відмовтеся від отримання та негайно повідомте нас.</p>
+            <p>Для отримання замовлення потрібно надати номер замовлення та документ, що посвідчує особу.</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Оплата -->
+      <div>
+        <div class="bg-white rounded-3xl shadow-xl p-8 mb-8">
+          <div class="flex items-center mb-6">
+            <div class="w-12 h-12 bg-rose-100 rounded-full flex items-center justify-center mr-4">
+              <span class="text-2xl">💳</span>
+            </div>
+            <h2 class="text-3xl font-bold text-rose-900">Оплата</h2>
+          </div>
+          
+          <div class="space-y-6">
+            <div>
+              <h3 class="text-xl font-bold text-rose-800 mb-4">Способи оплати</h3>
+              <div class="grid grid-cols-2 gap-4">
+                <div class="bg-rose-50 rounded-xl p-6 text-center hover:bg-rose-100 transition cursor-pointer">
+                  <div class="text-4xl mb-3">💳</div>
+                  <h4 class="font-bold text-rose-900 mb-1">Карткою онлайн</h4>
+                  <p class="text-sm text-rose-600">Visa, Mastercard</p>
+                </div>
+                <div class="bg-rose-50 rounded-xl p-6 text-center hover:bg-rose-100 transition cursor-pointer">
+                  <div class="text-4xl mb-3">📱</div>
+                  <h4 class="font-bold text-rose-900 mb-1">Google/Apple Pay</h4>
+                  <p class="text-sm text-rose-600">Швидка оплата</p>
+                </div>
+                <div class="bg-rose-50 rounded-xl p-6 text-center hover:bg-rose-100 transition cursor-pointer">
+                  <div class="text-4xl mb-3">💵</div>
+                  <h4 class="font-bold text-rose-900 mb-1">Готівкою</h4>
+                  <p class="text-sm text-rose-600">Кур'єру або в касі</p>
+                </div>
+                <div class="bg-rose-50 rounded-xl p-6 text-center hover:bg-rose-100 transition cursor-pointer">
+                  <div class="text-4xl mb-3">🏦</div>
+                  <h4 class="font-bold text-rose-900 mb-1">На картку</h4>
+                  <p class="text-sm text-rose-600">Безготівковий розрахунок</p>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-rose-800 mb-3">Гарантії безпеки</h3>
+              <div class="bg-green-50 rounded-xl p-4">
+                <div class="flex items-center">
+                  <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                    <span class="text-green-600">🔒</span>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-green-900">Захищена оплата</h4>
+                    <p class="text-green-700 text-sm">Всі платежі захищені SSL-шифруванням</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 class="text-xl font-bold text-rose-800 mb-3">Підтвердження оплати</h3>
+              <ul class="space-y-2 text-rose-700">
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Чек на email після оплати</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>СМС-повідомлення про статус замовлення</span>
+                </li>
+                <li class="flex items-start">
+                  <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                  </svg>
+                  <span>Повернення коштів у разі проблем</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Важлива інформація -->
+        <div class="bg-gradient-to-r from-rose-100 to-pink-100 rounded-3xl p-8">
+          <h3 class="text-2xl font-bold text-rose-900 mb-6">⚠️ Важлива інформація</h3>
+          
+          <div class="space-y-4">
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <span class="text-rose-700">⏰</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-rose-800 mb-1">Терміни замовлення</h4>
+                <p class="text-rose-700 text-sm">Для складних тортів рекомендуємо замовляти за 3-5 днів</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <span class="text-rose-700">❄️</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-rose-800 mb-1">Зберігання</h4>
+                <p class="text-rose-700 text-sm">Десерти потребують холодильника після отримання</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start">
+              <div class="w-8 h-8 bg-rose-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
+                <span class="text-rose-700">🎁</span>
+              </div>
+              <div>
+                <h4 class="font-bold text-rose-800 mb-1">Подарункова упаковка</h4>
+                <p class="text-rose-700 text-sm">За бажанням - безкоштовна подарункова упаковка</p>
+              </div>
             </div>
           </div>
         </div>
@@ -94,38 +236,40 @@
     </div>
   </section>
   
-  <!-- Правила -->
+  <!-- Повернення -->
   <section class="container mx-auto px-4 py-12">
-    <div class="bg-gradient-to-r from-rose-100 to-pink-100 rounded-3xl p-8">
-      <h2 class="text-3xl font-bold text-rose-900 mb-6">📋 Важлива інформація</h2>
-      
-      <div class="grid md:grid-cols-2 gap-6">
-        <div>
-          <h3 class="text-xl font-bold text-rose-800 mb-3">Умови доставки</h3>
-          <ul class="space-y-2 text-rose-700">
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span>Доставка здійснюється щодня з 10:00 до 20:00</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span>Завчасно повідомляємо про час прибуття кур'єра</span>
-            </li>
-          </ul>
+    <div class="bg-white rounded-3xl shadow-xl overflow-hidden">
+      <div class="md:flex">
+        <div class="md:w-1/3 bg-rose-900 text-white p-8 md:p-12">
+          <h3 class="text-3xl font-bold mb-4">🔄 Повернення</h3>
+          <p>Ми гарантуємо якість наших продуктів. У разі проблем - повернемо кошти.</p>
         </div>
-        
-        <div>
-          <h3 class="text-xl font-bold text-rose-800 mb-3">Правила повернення</h3>
-          <ul class="space-y-2 text-rose-700">
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-              </svg>
-              <span>Повернення протягом 24 годин з моменту отримання</span>
-            </li>
-            <li class="flex items-start">
-              <svg class="w-5 h-5 text-rose-500 mr-2 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0
+        <div class="md:w-2/3 p-8 md:p-12">
+          <h4 class="text-xl font-bold text-rose-900 mb-4">Умови повернення</h4>
+          <div class="space-y-3 text-rose-700">
+            <p>Повернення коштів здійснюється протягом <strong>24 годин</strong> з моменту отримання замовлення.</p>
+            <p>Для повернення необхідно надати фото продукту та чек про оплату.</p>
+            <p>Кошти повертаються на картку, з якої була здійснена оплата, протягом 3-5 банківських днів.</p>
+            <p class="text-sm text-rose-500">* Деякі продукти не підлягають поверненню згідно з чинним законодавством.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="container mx-auto px-4 py-16 text-center">
+    <div class="bg-gradient-to-r from-rose-500 to-pink-600 rounded-3xl p-12 text-white shadow-2xl">
+      <h2 class="text-4xl font-bold mb-6">Залишились питання?</h2>
+      <p class="text-xl mb-8 opacity-90">Наш менеджер з радістю відповість на всі ваші запитання про доставку та оплату</p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <%= link_to 'Зателефонувати', 'tel:+380671234567', 
+              class: 'bg-white text-rose-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-rose-50 transition shadow-lg' %>
+        <%= link_to 'Написати в чат', contact_path, 
+              class: 'border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition' %>
+      </div>
+    </div>
+  </section>
+  
+  <%= render 'shared/footer' %>
+</div>

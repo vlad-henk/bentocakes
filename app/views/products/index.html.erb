@@ -1,4 +1,181 @@
-<div>
-  <h1 class="font-bold text-4xl">Products#index</h1>
-  <p>Find me in app/views/products/index.html.erb</p>
+<%# app/views/products/index.html.erb %>
+<div class="min-h-screen w-full bg-gradient-to-b from-pink-50 to-white">
+  <%= render 'shared/navbar' %>
+  
+  <div class="container mx-auto px-4 py-8">
+    <!-- Хлібні крихти -->
+    <nav class="flex space-x-2 text-sm text-rose-600 mb-8">
+      <%= link_to 'Головна', root_path, class: 'hover:text-rose-800' %>
+      <span>/</span>
+      <span class="text-rose-900 font-medium">Меню</span>
+    </nav>
+    
+    <!-- Заголовок та фільтри -->
+    <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-12">
+      <div>
+        <h1 class="text-4xl md:text-5xl font-bold text-rose-900">Наше меню</h1>
+        <p class="text-rose-700 mt-2">Виберіть ваші улюблені солодощі</p>
+      </div>
+      
+      <!-- Фільтр категорій -->
+      <div class="mt-4 md:mt-0">
+        <div class="flex flex-wrap gap-2">
+          <%= link_to 'Всі товари', products_path, 
+                class: "px-4 py-2 rounded-full #{params[:category].blank? ? 'bg-rose-600 text-white' : 'bg-rose-100 text-rose-700 hover:bg-rose-200'}" %>
+          
+          <% @categories.each do |key, name| %>
+            <%= link_to name, products_path(category: key), 
+                  class: "px-4 py-2 rounded-full #{params[:category] == key ? 'bg-rose-600 text-white' : 'bg-rose-100 text-rose-700 hover:bg-rose-200'}" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Кількість товарів -->
+    <div class="mb-8">
+      <p class="text-rose-700">
+        <% if @current_category %>
+          <%= @categories[@current_category] %>: 
+        <% end %>
+        Знайдено <span class="font-bold text-rose-900"><%= @products.count %></span> товарів
+      </p>
+    </div>
+    
+    <!-- Список товарів -->
+    <% if @products.any? %>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <% @products.each do |product| %>
+          <% 
+            # Визначаємо класи для фону залежно від категорії
+            background_classes = case product.category
+            when 'cakes'
+              'from-rose-200 to-pink-300'
+            when 'desserts'
+              'from-amber-200 to-orange-300'
+            else
+              'from-blue-200 to-cyan-300'
+            end
+            
+            # Емодзі для категорії
+            emoji = case product.category
+            when 'cakes'
+              '🎂'
+            when 'desserts'
+              '🧁'
+            else
+              '🍰'
+            end
+            
+            # Класи для бейджа
+            badge_classes = case product.category
+            when 'cakes'
+              'bg-white/90 text-rose-700'
+            when 'desserts'
+              'bg-white/90 text-amber-700'
+            else
+              'bg-white/90 text-blue-700'
+            end
+          %>
+          
+          <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
+            <!-- Зображення товару -->
+            <div class="h-48 relative overflow-hidden">
+              <div class="absolute inset-0 bg-gradient-to-br <%= background_classes %>">
+                
+                <!-- Емодзі для категорії -->
+                <div class="absolute inset-0 flex items-center justify-center">
+                  <span class="text-6xl"><%= emoji %></span>
+                </div>
+                
+                <!-- Бейдж категорії -->
+                <div class="absolute top-4 left-4">
+                  <span class="px-3 py-1 rounded-full text-xs font-medium <%= badge_classes %> backdrop-blur-sm">
+                    <%= @categories[product.category] %>
+                  </span>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Інформація про товар -->
+            <div class="p-6">
+              <h3 class="text-xl font-bold text-rose-900 mb-2 line-clamp-1">
+                <%= product.name %>
+              </h3>
+              
+              <p class="text-rose-600 text-sm mb-4 line-clamp-2">
+                <%= product.description %>
+              </p>
+              
+              <!-- Ціна та кнопка -->
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-2xl font-bold text-amber-600">
+                    <%= number_to_currency(product.price, unit: '₴', format: '%n %u') %>
+                  </span>
+                </div>
+                
+                <!-- Форма додавання в корзину -->
+                <%= form_with(url: add_item_cart_path, method: :post, local: true) do |f| %>
+                  <%= f.hidden_field :product_id, value: product.id %>
+                  <%= f.hidden_field :quantity, value: 1 %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token if protect_against_forgery? %>
+                  <button type="submit" 
+                    class="bg-rose-100 hover:bg-rose-200 text-rose-700 px-4 py-2 rounded-full transition flex items-center space-x-2">
+                    <span>В кошик</span>
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                  </button>
+                <% end %>
+              </div>
+              
+              <!-- Посилання на детальну інформацію -->
+              <div class="mt-4 pt-4 border-t border-rose-100">
+                <%= link_to 'Детальніше →', product_path(product), 
+                      class: 'text-rose-600 hover:text-rose-800 text-sm font-medium' %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <!-- Якщо товарів немає -->
+      <div class="text-center py-16">
+        <div class="text-8xl mb-6">🍰</div>
+        <h2 class="text-3xl font-bold text-rose-900 mb-4">Товари не знайдені</h2>
+        <p class="text-rose-700 mb-8 max-w-md mx-auto">
+          На жаль, в цій категорії поки що немає товарів.
+        </p>
+        <%= link_to 'Повернутися до всіх товарів', products_path,
+              class: 'bg-gradient-to-r from-rose-500 to-pink-600 text-white font-bold py-3 px-8 rounded-full hover:shadow-xl transition' %>
+      </div>
+    <% end %>
+    
+    <!-- Декоративний елемент -->
+    <div class="mt-16 text-center">
+      <div class="inline-flex items-center space-x-4 text-rose-600">
+        <div class="w-8 h-0.5 bg-rose-300"></div>
+        <span>Солодкої вам покупки! 🍭</span>
+        <div class="w-8 h-0.5 bg-rose-300"></div>
+      </div>
+    </div>
+  </div>
+  
+  <%= render 'shared/footer' %>
 </div>
+
+<style>
+.line-clamp-1 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
+
+.line-clamp-2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+</style>

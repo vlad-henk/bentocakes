@@ -60,7 +60,7 @@
     
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
       <% [
-        { name: 'Бенто-торти', emoji: '🎂', color: 'from-rose-400 to-pink-500', path: "#{products_path}?category=bento_cakes" },
+        { name: 'Бенто-торти', emoji: '🎂', color: 'from-rose-400 to-pink-500', path: "#{products_path}?category=cakes" },
         { name: 'Капкейки', emoji: '🧁', color: 'from-amber-400 to-orange-500', path: "#{products_path}?category=cupcakes" },
         { name: 'Макарони', emoji: '🍪', color: 'from-purple-400 to-pink-500', path: "#{products_path}?category=macarons" },
         { name: 'Десерти', emoji: '🍮', color: 'from-blue-400 to-cyan-500', path: "#{products_path}?category=desserts" }
@@ -94,7 +94,7 @@
             <div class="h-64 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
               <span class="text-6xl">
                 <%= case product.category
-                    when 'bento_cakes' then '🎂'
+                    when 'cakes' then '🎂'
                     when 'cupcakes' then '🧁'
                     when 'macarons' then '🍪'
                     else '🍰'

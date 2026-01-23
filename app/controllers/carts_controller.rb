@@ -8,7 +8,6 @@ class CartsController < ApplicationController
   
   def update
     # Логіка оновлення корзини
-    # Наприклад, зміна кількості товарів
     redirect_to cart_path, notice: 'Корзину оновлено'
   end
   
@@ -27,16 +26,21 @@ class CartsController < ApplicationController
     cart_item.quantity = cart_item.persisted? ? cart_item.quantity + quantity : quantity
     
     if cart_item.save
-      redirect_back fallback_location: products_path, notice: 'Товар додано до корзини'
+      redirect_back fallback_location: products_path, notice: "#{product.name} додано до кошика!"
     else
       redirect_back fallback_location: products_path, alert: 'Не вдалося додати товар'
     end
   end
   
   def remove_item
-    cart_item = current_cart.cart_items.find(params[:item_id])
-    cart_item.destroy
-    redirect_to cart_path, notice: 'Товар видалено з корзини'
+    cart_item = current_cart.cart_items.find_by(id: params[:item_id])
+    
+    if cart_item
+      cart_item.destroy
+      redirect_to cart_path, notice: 'Товар видалено з кошика'
+    else
+      redirect_to cart_path, alert: 'Товар не знайдено'
+    end
   end
   
   def clear
@@ -51,9 +55,11 @@ class CartsController < ApplicationController
   end
   
   def current_cart
+    # Якщо користувач зареєстрований - використовуємо його корзину
     if user_signed_in?
       current_user.cart || current_user.create_cart
     else
+      # Для неавторизованих користувачів зберігаємо корзину в сесії
       if session[:cart_id]
         Cart.find_by(id: session[:cart_id])
       else
