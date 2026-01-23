@@ -30,6 +30,17 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
+    get "orders/index"
+    get "orders/show"
+    get "orders/update"
+    get "products/index"
+    get "products/show"
+    get "products/new"
+    get "products/create"
+    get "products/edit"
+    get "products/update"
+    get "products/destroy"
+    get "dashboard/index"
     root to: 'dashboard#index'
     resources :products
     resources :orders, only: [:index, :show, :update]

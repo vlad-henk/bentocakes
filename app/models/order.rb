@@ -21,6 +21,12 @@ class Order < ApplicationRecord
     order_items.sum(:quantity)
   end
   
+  def products_with_quantities
+    order_items.map do |item|
+      "#{item.product.name} ×#{item.quantity}"
+    end.join(', ')
+  end
+  
   private
   
   def set_default_status

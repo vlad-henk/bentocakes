@@ -1,0 +1,77 @@
+<div class="mb-8">
+  <h1 class="text-3xl font-bold text-gray-800">Панель управління</h1>
+  <p class="text-gray-600">Вітаємо в адмінпанелі BentoCakes</p>
+</div>
+
+<!-- Статистика -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="text-3xl font-bold text-rose-600 mb-2"><%= @products_count %></div>
+    <div class="text-gray-600">Товарів</div>
+    <%= link_to 'Управляти товарами →', admin_products_path, class: 'text-rose-600 hover:text-rose-800 text-sm mt-2 block' %>
+  </div>
+  
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="text-3xl font-bold text-rose-600 mb-2"><%= @orders_count %></div>
+    <div class="text-gray-600">Замовлень</div>
+    <div class="text-sm text-amber-600 mt-1"><%= @pending_orders %> очікують обробки</div>
+    <%= link_to 'Управляти замовленнями →', admin_orders_path, class: 'text-rose-600 hover:text-rose-800 text-sm mt-2 block' %>
+  </div>
+  
+  <div class="bg-white rounded-lg shadow p-6">
+    <div class="text-3xl font-bold text-rose-600 mb-2"><%= @users_count %></div>
+    <div class="text-gray-600">Користувачів</div>
+    <div class="text-sm text-gray-500 mt-1">Зареєстровано на сайті</div>
+  </div>
+</div>
+
+<!-- Останні замовлення -->
+<div class="bg-white rounded-lg shadow overflow-hidden">
+  <div class="px-6 py-4 border-b border-gray-200">
+    <h2 class="text-xl font-bold text-gray-800">Останні замовлення</h2>
+  </div>
+  
+  <div class="overflow-x-auto">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Користувач</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Телефон</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Продукт</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Сума</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Статус</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Дата</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Дії</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @recent_orders.each do |order| %>
+          <tr>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#<%= order.id %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.user.email %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.user.phone %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.products_with_quantities %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= number_to_currency(order.total, unit: '₴') %></td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                <%= order_status_classes(order.status) %>">
+                <%= order_status_text(order.status) %>
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= l(order.created_at, format: :short) %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
+              <%= link_to 'Переглянути', admin_order_path(order), class: 'text-rose-600 hover:text-rose-900' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  
+  <% if @recent_orders.empty? %>
+    <div class="px-6 py-8 text-center text-gray-500">
+      Немає замовлень
+    </div>
+  <% end %>
+</div>

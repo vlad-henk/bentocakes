@@ -8,6 +8,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   
   after_create :create_cart
+
+  def admin?
+    admin == true
+  end
   
   private
   

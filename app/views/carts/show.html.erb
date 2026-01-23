@@ -82,19 +82,11 @@
               <div class="flex justify-between">
                 <span class="text-rose-700">Товари:</span>
                 <span class="font-medium"><%= @cart.total_items %> шт.</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-rose-700">Сума:</span>
-                <span class="font-medium"><%= @cart.total_price %> ₴</span>
-              </div>
-              <div class="flex justify-between">
-                <span class="text-rose-700">Доставка:</span>
-                <span class="font-medium">100 ₴</span>
-              </div>
+              </div>              
               <div class="border-t border-rose-200 pt-4">
                 <div class="flex justify-between text-lg font-bold">
                   <span class="text-rose-900">Всього:</span>
-                  <span class="text-amber-600"><%= @cart.total_price + 100 %> ₴</span>
+                  <span class="text-amber-600"><%= @cart.total_price%> ₴</span>
                 </div>
               </div>
             </div>
