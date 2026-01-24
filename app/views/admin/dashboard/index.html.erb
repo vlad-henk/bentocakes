@@ -38,6 +38,7 @@
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">ID</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Користувач</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Телефон</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Адреса</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Продукт</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Сума</th>
           <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Статус</th>
@@ -51,6 +52,7 @@
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">#<%= order.id %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.user.email %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.user.phone %></td>
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.delivery_address %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500"><%= order.products_with_quantities %></td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900"><%= number_to_currency(order.total, unit: '₴') %></td>
             <td class="px-6 py-4 whitespace-nowrap">

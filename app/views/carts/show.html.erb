@@ -32,15 +32,17 @@
                     <div class="flex items-center justify-between mt-2">
                       <div class="flex items-center space-x-4">
                         <!-- Кількість -->
-                        <div class="flex items-center border border-rose-200 rounded-full">
-                          <%= button_to '-', remove_item_cart_path(item_id: item.id), 
-                                method: :delete,
-                                class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-l-full' %>
-                          <span class="px-3 py-1"><%= item.quantity %></span>
-                          <%= button_to '+', add_item_cart_path(product_id: item.product.id), 
-                                method: :post,
-                                class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-r-full' %>
-                        </div>
+                    <div class="flex items-center border border-rose-200 rounded-full">
+                      <%= form_tag(remove_item_cart_path(item_id: item.id), method: :delete) do %>
+                        <%= submit_tag '-', class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-l-full cursor-pointer' %>
+                      <% end %>
+                      
+                      <span class="px-3 py-1"><%= item.quantity %></span>
+                      
+                      <%= form_tag(add_item_cart_path(product_id: item.product.id), method: :post) do %>
+                        <%= submit_tag '+', class: 'px-3 py-1 text-rose-600 hover:bg-rose-50 rounded-r-full cursor-pointer' %>
+                      <% end %>
+                    </div>
                         
                         <!-- Ціна за одиницю -->
                         <span class="text-rose-700"><%= item.product.price %> ₴</span>
