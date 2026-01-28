@@ -26,20 +26,10 @@ registry:
 env:
   secret:
     - RAILS_MASTER_KEY
-    - KAMAL_REGISTRY_PASSWORD
-  clear:
-    SOLID_QUEUE_IN_PUMA: true
-
-aliases:
-  console: app exec --interactive --reuse "bin/rails console"
-  shell: app exec --interactive --reuse "bash"
-  logs: app logs -f
-  dbc: app exec --interactive --reuse "bin/rails dbconsole"
 
 volumes:
-  - "my_blog_app_storage:/rails/storage"
-
-asset_path: /rails/public/assets
+  - "/db:/rails/sqlite"
+  - "/storage:/rails/storage"
 
 # Configure the image builder.
 builder:

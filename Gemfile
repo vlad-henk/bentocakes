@@ -64,3 +64,5 @@ group :test do
 end
 
 gem "kamal", "~> 2.10"
+
+gem "thruster", "~> 0.1.17"
