@@ -5,7 +5,7 @@ gem "rails", "~> 7.2.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem "sqlite3", ">= 1.4"
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -34,7 +34,7 @@ gem "tzinfo-data", platforms: %i[ windows jruby ]
 gem "bootsnap", require: false
 
 gem 'devise', '~> 4.9' 
-gem 'stripe', '~> 10.0' 
+gem 'stripe', '~> 18.2' 
 gem 'pagy', '~> 8.0' 
 
 
@@ -62,3 +62,7 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "kamal", "~> 2.10"
+
+gem "thruster", "~> 0.1.17"
