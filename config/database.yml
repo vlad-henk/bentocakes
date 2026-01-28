@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: bentocakes_production
-  username: bentocakes
-  password: <%= ENV["BENTOCAKES_DATABASE_PASSWORD"] %>
+  username: deploy
+  password: <%= ENV['DATABASE_PASSWORD'] %>
