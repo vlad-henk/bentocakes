@@ -1,4 +1,44 @@
-<div>
-  <h1 class="font-bold text-4xl">Admin::Products#new</h1>
-  <p>Find me in app/views/admin/products/new.html.erb</p>
+<div class="max-w-2xl mx-auto py-10">
+  <h1 class="text-2xl font-bold mb-6">Новий товар</h1>
+
+  <%= form_with model: [:admin, @product], local: true do |f| %>
+    
+    <div class="mb-4">
+      <%= f.label :name, "Назва", class: "block font-medium mb-1" %>
+      <%= f.text_field :name, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :description, "Опис", class: "block font-medium mb-1" %>
+      <%= f.text_area :description, rows: 4, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :price, "Ціна", class: "block font-medium mb-1" %>
+      <%= f.number_field :price, step: 0.01, class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+    <div class="mb-4">
+      <%= f.label :category, "Категорія", class: "block font-medium mb-1" %>
+      <%= f.select :category,
+            options_for_select([["Cakes", "cakes"], ["Desserts", "desserts"]]),
+            { prompt: "Оберіть категорію" },
+            class: "w-full border rounded px-3 py-2" %>
+    </div>
+
+
+    <div class="mb-4 flex items-center gap-2">
+      <%= f.check_box :active %>
+      <%= f.label :active, "Активний" %>
+    </div>
+
+    <div class="flex gap-4">
+      <%= f.submit "Створити",
+            class: "bg-rose-600 text-white px-6 py-2 rounded hover:bg-rose-700" %>
+
+      <%= link_to "Назад", admin_products_path,
+            class: "px-6 py-2 border rounded" %>
+    </div>
+
+  <% end %>
 </div>
