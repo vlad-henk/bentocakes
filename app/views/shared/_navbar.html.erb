@@ -28,6 +28,11 @@
       <!-- Іконки дій -->
       <div class="flex items-center space-x-6">
         <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <%= link_to 'Адмінка',
+                  admin_root_path,
+                  class: 'text-amber-600 hover:text-amber-800 font-semibold hidden md:block' %>
+          <% end %>
           <%= link_to 'Мої замовлення', orders_path, 
                 class: 'text-rose-700 hover:text-rose-900 font-medium hidden md:block' %>
           <%= link_to current_user.name, edit_user_registration_path, 
