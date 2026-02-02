@@ -1,43 +1,124 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<div class="min-h-screen w-full bg-gradient-to-b from-pink-50 to-white flex items-center justify-center py-12">
+  <div class="container mx-auto px-4">
+    <div class="max-w-md mx-auto">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+      <!-- Header -->
+      <div class="text-center mb-8">
+        <%= link_to root_path, class: 'inline-flex items-center space-x-3' do %>
+          <div class="w-12 h-12 bg-gradient-to-br from-rose-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+            <span class="text-white text-2xl font-bold">B</span>
+          </div>
+          <h1 class="text-3xl font-bold text-rose-800">
+            Bento<span class="text-amber-600">Cakes</span>
+          </h1>
+        <% end %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <h2 class="text-2xl font-bold text-rose-900 mt-6">
+          Редагування профілю
+        </h2>
+      </div>
+
+      <!-- Card -->
+      <div class="bg-white rounded-3xl shadow-xl p-8">
+        <%= form_for(resource,
+              as: resource_name,
+              url: registration_path(resource_name),
+              html: { method: :put, class: "space-y-6" }) do |f| %>
+
+          <%= render "devise/shared/error_messages", resource: resource %>
+
+          <!-- Email -->
+          <div>
+            <%= f.label :email, "Email",
+                  class: "block text-rose-700 mb-2 font-medium" %>
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",
+                  class: "w-full border border-rose-200 rounded-xl p-3
+                          focus:border-rose-300 focus:ring focus:ring-rose-100 transition" %>
+          </div>
+
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p class="text-sm text-amber-600">
+              Очікує підтвердження: <%= resource.unconfirmed_email %>
+            </p>
+          <% end %>
+
+          <!-- Password -->
+          <div>
+            <%= f.label :password, "Новий пароль",
+                  class: "block text-rose-700 mb-2 font-medium" %>
+            <p class="text-sm text-rose-500 mb-2">
+              Залиш порожнім, якщо не хочеш змінювати
+            </p>
+            <%= f.password_field :password, autocomplete: "new-password",
+                  class: "w-full border border-rose-200 rounded-xl p-3
+                          focus:border-rose-300 focus:ring focus:ring-rose-100 transition" %>
+          </div>
+
+          <!-- Password confirmation -->
+          <div>
+            <%= f.label :password_confirmation, "Підтвердження пароля",
+                  class: "block text-rose-700 mb-2 font-medium" %>
+            <%= f.password_field :password_confirmation, autocomplete: "new-password",
+                  class: "w-full border border-rose-200 rounded-xl p-3
+                          focus:border-rose-300 focus:ring focus:ring-rose-100 transition" %>
+          </div>
+
+          <!-- Current password -->
+          <div>
+            <%= f.label :current_password, "Поточний пароль",
+                  class: "block text-rose-700 mb-2 font-medium" %>
+            <p class="text-sm text-rose-500 mb-2">
+              Потрібен для підтвердження змін
+            </p>
+            <%= f.password_field :current_password, autocomplete: "current-password",
+                  class: "w-full border border-rose-200 rounded-xl p-3
+                          focus:border-rose-300 focus:ring focus:ring-rose-100 transition" %>
+          </div>
+
+          <!-- Submit -->
+          <div class="pt-4">
+            <%= f.submit "Зберегти зміни",
+                  class: "w-full bg-gradient-to-r from-rose-500 to-pink-600
+                          text-white font-bold py-4 rounded-xl
+                          hover:shadow-xl transition shadow-lg cursor-pointer" %>
+          </div>
+        <% end %>
+
+        <!-- Danger zone -->
+        <div class="mt-8 pt-6 border-t border-rose-100">
+          <h3 class="text-center text-sm font-semibold text-rose-700 mb-4">
+            Видалення акаунту
+          </h3>
+
+          <div class="bg-rose-50 border border-rose-200 rounded-2xl p-4">
+            <form action="<%= registration_path(resource_name) %>"
+                  method="post"
+                  data-turbo="false">
+              <input type="hidden" name="_method" value="delete">
+              <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+              <button type="submit"
+                onclick="return confirm('Ти впевнений?')"
+                class="w-full bg-gradient-to-r from-red-500 to-pink-600
+                      text-white py-3 rounded-xl
+                      font-semibold tracking-wide
+                      shadow-lg shadow-red-200
+                      hover:from-red-600 hover:to-pink-700
+                      hover:shadow-xl transition-all duration-200">
+                Видалити мій акаунт
+              </button>
+
+            </form>
+          </div>
+        </div>
+
+
+
+        <div class="mt-6 text-center">
+          <%= link_to "← Назад", :back,
+                class: "text-rose-600 hover:text-rose-800 font-medium" %>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-    <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
-    <% end %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-    <%= f.password_field :current_password, autocomplete: "current-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Update" %>
-  </div>
-<% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>
+</div>
