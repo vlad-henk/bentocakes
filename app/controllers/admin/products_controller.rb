@@ -33,11 +33,22 @@ class Admin::ProductsController < Admin::BaseController
       render :edit
     end
   end
-  
-  def destroy
-    @product.destroy
-    redirect_to admin_products_path, notice: 'Товар успішно видалено'
+
+  def activate
+  product = Product.find(params[:id])
+  product.update!(active: true)
+  redirect_to admin_products_path, notice: 'Товар активовано'
   end
+
+  def deactivate
+    product = Product.find(params[:id])
+    product.update!(active: false)
+    redirect_to admin_products_path, notice: 'Товар деактивовано'
+  end
+  #def destroy
+    #@product.destroy
+    #redirect_to admin_products_path, notice: 'Товар видалено'
+  #end
   
   private
   

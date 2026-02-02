@@ -42,7 +42,12 @@ Rails.application.routes.draw do
     get "products/destroy"
     get "dashboard/index"
     root to: 'dashboard#index'
-    resources :products
+    resources :products do
+      member do
+        patch :activate
+        patch :deactivate
+      end
+    end
     resources :orders, only: [:index, :show, :update]
     resources :categories
   end

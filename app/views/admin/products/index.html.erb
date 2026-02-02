@@ -45,12 +45,22 @@
               <% end %>
             </td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
-              <%= link_to 'Перегляд', admin_product_path(product), class: 'text-rose-600 hover:text-rose-900' %>
-              <%= link_to 'Редагувати', edit_admin_product_path(product), class: 'text-blue-600 hover:text-blue-900' %>
-              <%= link_to 'Видалити', admin_product_path(product), 
-                    method: :delete, 
-                    data: { confirm: 'Ви впевнені?' },
-                    class: 'text-red-600 hover:text-red-900' %>
+              <%= link_to 'Редагувати',
+                    edit_admin_product_path(product),
+                    class: 'text-blue-600 hover:text-blue-900' %>
+
+              <% if product.active? %>
+                <%= button_to 'Деактивувати',
+                      deactivate_admin_product_path(product),
+                      method: :patch,
+                      data: { confirm: 'Деактивувати товар?' },
+                      class: 'text-red-600 hover:text-red-900 bg-transparent border-0 p-0 inline' %>
+              <% else %>
+                <%= button_to 'Активувати',
+                      activate_admin_product_path(product),
+                      method: :patch,
+                      class: 'text-green-600 hover:text-green-900 bg-transparent border-0 p-0 inline' %>
+              <% end %>
             </td>
           </tr>
         <% end %>
