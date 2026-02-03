@@ -1,8 +1,32 @@
 <div class="max-w-2xl mx-auto py-10">
-  <h1 class="text-2xl font-bold mb-6">Новий товар</h1>
+  <h1 class="text-2xl font-bold mb-6">
+    <%= @product.persisted? ? 'Редагувати товар' : 'Новий товар' %>
+  </h1>
 
   <%= form_with model: [:admin, @product], local: true do |f| %>
     
+    <!-- Поле для фото -->
+    <div class="mb-6">
+      <%= f.label :photo, "Фото товару", class: "block font-medium mb-2" %>
+      
+      <% if @product.photo_url.present? %>
+        <div class="mb-4">
+          <%= image_tag @product.photo_url(:medium), 
+                class: "rounded-lg w-full max-w-md h-64 object-cover mb-2" %>
+          <p class="text-sm text-gray-600">Поточне фото</p>
+        </div>
+      <% end %>
+      
+      <%= f.file_field :photo, 
+            accept: 'image/jpeg,image/png,image/webp',
+            class: "w-full border rounded px-3 py-2" %>
+      
+      <p class="text-sm text-gray-600 mt-2">
+        Рекомендовано: JPEG, PNG. Макс. розмір: 5MB
+      </p>
+    </div>
+    
+    <!-- Інші поля (залишаються без змін) -->
     <div class="mb-4">
       <%= f.label :name, "Назва", class: "block font-medium mb-1" %>
       <%= f.text_field :name, class: "w-full border rounded px-3 py-2" %>
@@ -21,23 +45,22 @@
     <div class="mb-4">
       <%= f.label :category, "Категорія", class: "block font-medium mb-1" %>
       <%= f.select :category,
-            options_for_select([["Cakes", "cakes"], ["Desserts", "desserts"]]),
+            options_for_select([["Торти", "cakes"], ["Десерти", "desserts"]]),
             { prompt: "Оберіть категорію" },
             class: "w-full border rounded px-3 py-2" %>
     </div>
 
-
-    <div class="mb-4 flex items-center gap-2">
-      <%= f.check_box :active %>
-      <%= f.label :active, "Активний" %>
+    <div class="mb-6 flex items-center gap-2">
+      <%= f.check_box :active, class: "w-5 h-5" %>
+      <%= f.label :active, "Активний", class: "font-medium" %>
     </div>
 
     <div class="flex gap-4">
-      <%= f.submit "Створити",
-            class: "bg-rose-600 text-white px-6 py-2 rounded hover:bg-rose-700" %>
+      <%= f.submit @product.persisted? ? "Оновити" : "Створити",
+            class: "bg-rose-600 text-white px-6 py-2 rounded hover:bg-rose-700 cursor-pointer" %>
 
       <%= link_to "Назад", admin_products_path,
-            class: "px-6 py-2 border rounded" %>
+            class: "px-6 py-2 border rounded hover:bg-gray-50" %>
     </div>
 
   <% end %>

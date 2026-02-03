@@ -80,20 +80,8 @@
           <div class="bg-white rounded-3xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1">
             <!-- Зображення товару -->
             <div class="h-48 relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-br <%= background_classes %>">
-                
-                <!-- Емодзі для категорії -->
-                <div class="absolute inset-0 flex items-center justify-center">
-                  <span class="text-6xl"><%= emoji %></span>
-                </div>
-                
-                <!-- Бейдж категорії -->
-                <div class="absolute top-4 left-4">
-                  <span class="px-3 py-1 rounded-full text-xs font-medium <%= badge_classes %> backdrop-blur-sm">
-                    <%= @categories[product.category] %>
-                  </span>
-                </div>
-              </div>
+              <%= image_tag product.photo_url(:medium), 
+                class: "w-full h-full object-cover hover:scale-105 transition-transform duration-500" %>
             </div>
             
             <!-- Інформація про товар -->

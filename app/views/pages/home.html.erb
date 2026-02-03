@@ -79,15 +79,10 @@
       <% @popular_products ||= [] %>
         <% @popular_products.each do |product| %>
           <div class="bg-white rounded-3xl shadow-xl overflow-hidden hover:shadow-2xl transition duration-300 transform hover:-translate-y-2">
-            <div class="h-64 bg-gradient-to-br from-rose-100 to-amber-100 flex items-center justify-center">
-              <span class="text-6xl">
-                <%= case product.category
-                    when 'cakes' then '🎂'
-                    when 'cupcakes' then '🧁'
-                    when 'macarons' then '🍪'
-                    else '🍰'
-                    end %>
-              </span>
+            <!-- Зображення товару -->
+            <div class="h-48 relative overflow-hidden">
+              <%= image_tag product.photo_url(:medium), 
+                class: "w-full h-full object-cover hover:scale-105 transition-transform duration-500" %>
             </div>
             <div class="p-6">
               <h3 class="text-xl font-bold text-rose-800 mb-2"><%= product.name %></h3>

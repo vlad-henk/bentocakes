@@ -18,51 +18,11 @@
     
     <div class="grid lg:grid-cols-2 gap-12">
       <!-- Зображення товару -->
-      <div>
-        <% 
-          background_classes = case @product.category
-          when 'cakes'
-            'from-rose-200 to-pink-300'
-          when 'desserts'
-            'from-amber-200 to-orange-300'
-          else
-            'from-blue-200 to-cyan-300'
-          end
-          
-          emoji = case @product.category
-          when 'cakes'
-            '🎂'
-          when 'desserts'
-            '🧁'
-          else
-            '🍰'
-          end
-          
-          badge_classes = case @product.category
-          when 'cakes'
-            'bg-rose-100 text-rose-700'
-          when 'desserts'
-            'bg-amber-100 text-amber-700'
-          else
-            'bg-blue-100 text-blue-700'
-          end
-        %>
-        
-        <div class="bg-gradient-to-br <%= background_classes %> rounded-3xl h-96 flex items-center justify-center mb-6">
-          <span class="text-8xl"><%= emoji %></span>
-        </div>
-        
-        <!-- Категорія -->
-        <div class="flex items-center justify-center space-x-4">
-          <span class="px-4 py-2 rounded-full text-sm font-medium <%= badge_classes %>">
-            <%= @categories[@product.category] %>
-          </span>
-          
-          <span class="text-rose-600">•</span>
-          <span class="text-rose-600">В наявності</span>
-        </div>
+      <div class="h-48 relative overflow-hidden">
+        <%= image_tag @product.photo_url(:medium), 
+          class: "w-full h-full object-cover hover:scale-105 transition-transform duration-500" %>
       </div>
-      
+        
       <!-- Інформація про товар -->
       <div>
         <h1 class="text-4xl font-bold text-rose-900 mb-4"><%= @product.name %></h1>
